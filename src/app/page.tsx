@@ -1,37 +1,42 @@
-import Home from "./components/home/home";
-import InvoiceForm from "./services/InvoiceForm";
+"use client"
 
-export default function AppHome() {
+import { useState } from "react";
+import InvoiceGenerator from "./components/InvoiceGen";
+import Image from "next/image";
+import logo from "@/assets/bblogo.png"
+
+
+const Home: React.FC = () => {
+  const [selectedOption, setSelectedOption] = useState<string>("Invoice Generator");
+
   return (
-    <div>
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    <div className="min-h-screen flex">
+      {/* Sidebar stuff */}
+      <aside className="w-64 bg-sec text-white">
+        <Image
+          src={logo}
+          alt={""}
+          className="relative my-10 p-4"
         />
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <link rel="shortcut icon" href="images/favicon.png" type=""></link>
-
-        <title> Blue Bucket </title>
-
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
-
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        ></link>
-
-        <link href="css/font-awesome.min.css" rel="stylesheet"></link>
-
-        <link href="css/style.css" rel="stylesheet"></link>
-        <link href="css/responsive.css" rel="stylesheet"></link>
-      </head>
-      <body>
-        <Home />
-      </body>
+        <ul>
+          {/* Menu shit */}
+          <li>
+            <button
+              className={`block w-full text-left p-5 hover:bg-main-accent hover:text-white ${selectedOption === "Invoice Generator" ? "bg-gray-700" : ""
+                }`}
+              onClick={() => setSelectedOption("Invoice Generator")}
+            >
+              Invoice Generator
+            </button>
+          </li>
+        </ul>
+      </aside>
+      {/* Main screen */}
+      <main className="flex-1 px-36 py-24">
+        {selectedOption === "Invoice Generator" && <InvoiceGenerator />}
+      </main>
     </div>
   );
-}
+};
+
+export default Home;
