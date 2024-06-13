@@ -54,6 +54,7 @@ const InvoiceForm: React.FC = () => {
     e: ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.target;
+    const a = "";
     const items = [...formData.items];
     items[index] = { ...items[index], [name]: value };
     setFormData({ ...formData, items });
